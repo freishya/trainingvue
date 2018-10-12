@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+     <script type = "text/javascript" src = "global.js"></script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+
+  <body>
+    <div id="event">
+        <button @click='displayNumber'>Click Me</button>
+        <h2>{{total}}</h2>
+        <div :style="styleObj" @mouseover="changecolorbg" @mouseout="originalcolor"></div>
+        <button :style="btnStyle" @click.once='addone1'>Add once</button>
+        <h3>{{count1}}</h3>
+        <button :style="btnStyle" @click='addone2'>Add more than one</button>
+        <h3>{{count2}}</h3>
+        <a href="http://www.google.com" @click.prevent="preventEvent" :style="hrefStyle" target="_blank">Go for GOOGLE</a><br>
+        <input type="text" @keyup.ctrl.enter="showValue">{{value}}<br>
+    </div>
+  </body>
+
+  <script type = "text/javascript">
+    //** event
+      var vm3 = new Vue({
+          el: '#event',
+          data: {
+              num1:100,
+              num2:200,
+              count1:0,
+              count2:0,
+              total:'',
+              styleObj:{
+                  width:"100px",
+                  height:"100px",
+                  backgroundColor:"red"
+              },
+              btnStyle:{
+                  backgroundColor:'#2196F3!important',
+                  cursor:'pointer',
+                  padding: '8px 16px',
+                  verticalAlign: 'middle'
+              },
+              hrefStyle:{
+                  color:'#00f0f0',
+                  marginLeft:'20px',
+                  fontSize:'25px'
+              },
+              value:''
+          },
+          methods: {
+              displayNumber : function(event){
+                  console.log(event);
+                  return this.total = this.num1+ this.num2;
+              },
+              changecolorbg(event){
+                  this.styleObj.backgroundColor = "blue";
+              },
+              originalcolor(event){
+                  this.styleObj.backgroundColor = "red";
+              },
+              addone1(event){
+                  event.preventDefault();
+                  this.count1++;
+              },
+              addone2(event){
+                  event.preventDefault();
+                  this.count2++;
+              },
+              preventEvent(event){
+                  alert("Mau ke google ya?");
+              },
+              showValue(event){
+                  this.value = event.target.value;
+              }
+          },
+      });
+  </script>
+</html>

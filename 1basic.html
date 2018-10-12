@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+    <!-- <script type = "text/javascript" src = "global.js"></script> -->
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+
+  <body>
+    <div id="computed_props">
+       <h2>{{title}}</h2>
+       <button @click="tryme">Try Me</button>
+       <h5>{{timenow}}</h5>
+       <label for="filtername">Type name:</label>
+       <input type="text" v-model="filtered" />
+       <ul>
+           <li v-for="name in filteredNames">{{name}}</li>
+       </ul>
+       <input type="number" v-model.number="counter" />
+       <h5>Old: {{newcounter}}</h5>
+       <h5>New: {{counter}}</h5>
+       <input type="text" v-model="fullname" />
+       <h1>{{firstName}}</h1>
+       <h1>{{lastName}}</h1>
+       <h1>{{lass}}</h1>
+       Kilometers : <input type="text" v-model="kilometers">
+       Meters : <input type="text" v-model="meters">
+    </div>
+  </body>
+
+  <script type = "text/javascript">
+  //** el,data,method,computed,watch
+      var vm = new Vue({
+          el: '#computed_props',
+          data: {
+              title: "El,data,method,computed,watch",
+              timenow: null,
+              firstName : "Terry",
+              lastName : "Ben",
+              lass : "Kane",
+              kilometers : 0,
+              meters : 0,
+              names: [
+                  'Evan You',
+                  'John Lindquist',
+                  'Jen Looper',
+                  'Miriam Suzanne'
+                  ],
+              filtered: '',
+              counter: 0,
+              newcounter: 0
+          },
+          methods: {
+              tryme: function(){
+                  this.timenow = Date()
+              }
+          },
+          computed :{
+            fullname : {
+                get : function() {
+                   return this.firstName+" "+this.lastName+" "+this.lass;
+                },
+                set : function(name) {
+                   var fname = name.split(" ");
+                   this.firstName = fname[0];
+                   this.lastName = fname[1];
+                   this.lass = fname[2];
+                }
+            },
+            filteredNames : function(){
+                var filter = new RegExp(this.filtered, 'i');
+                return this.names.filter(function(el){
+                    return el.match(filter);
+                });
+            }
+          },
+          watch: {
+              counter: function(newVal,oldVal){
+                  this.newcounter = oldVal;
+                  this.counter = newVal;
+              },
+              kilometers: function (val) {
+                  this.kilometers = val;
+                  this.meters = val * 1000;
+              },
+              meters: function (val) {
+                  this.kilometers = val / 1000;
+                  this.meters = val;
+            }
+          }
+       });
+  </script>
+</html>

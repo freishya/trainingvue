@@ -1,0 +1,39 @@
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+ }
+ div {
+    margin: 10px 0;
+    padding: 12px;
+ }
+ .active {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+ }
+ .displayError{
+    color: #D8000C;
+    background-color: #FFBABA;
+ }
+ .fade-enter-active, .fade-leave-active{
+     transition: opacity 2s;
+ }
+ .fade-enter, .fade-leave-to, .fade-leave-active {
+     opacity: 0;
+ }
+ .shiftx-enter-active {
+     animation: shift-in 2s;
+ }
+ .shiftx-leave-active {
+     animation: shift-in 2s reverse;
+ }
+ @keyframes shift-in {
+     0% {transform:rotateX(0deg);}
+     25% {transform:rotateX(90deg);}
+     50% {transform:rotateX(120deg);}
+     75% {transform:rotateX(180deg);}
+     100% {transform:rotateX(360deg);}
+ }
+ .router-link-exact-active{
+   color: #a9e26c;
+   background-color: #474b40; 
+ }

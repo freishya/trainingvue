@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+     <script type = "text/javascript" src = "global.js"></script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+
+  <body>
+    <div id="hehe">
+        <child :text="title"></child>
+    </div>
+    <div id="customEvent">
+        <p style="font-size:15px;">Language Display: <b>{{languageClick}}</b></p>
+        <!-- this using method -->
+        <buttoncustom
+        v-for = "(item, index) in languages"
+        :item = "item"
+        :index = "index"
+        @showlanguage="languageddisp"></buttoncustom>
+
+        <!-- this is using emit -->
+        <!-- <buttoncustom
+        v-for = "(item, index) in languages"
+        :item = "item"
+        :index = "index"
+        @action="languageddisp"></buttoncustom> -->
+    </div>
+  </body>
+
+  <script type = "text/javascript">
+  Vue.component('buttoncustom',{
+    // using method || value store base on data in component
+    template: '<button @click="displayLanguage(item)"><span style="font-size:15px">{{item}} {{index}}</span></button>',
+    //using emit on click || value store base on data child and rewrite
+    //template: `<button @click="$emit('action',item)"><span style="font-size:15px">{{item}} {{index}}</span></button>`,
+    data() {
+       return {
+          counter : 0
+       }
+    },
+    props:['item', 'index'],
+    methods: {
+      displayLanguage(lng){
+          this.counter++;
+          this.$emit('showlanguage',lng);
+          alert(lng +' clicked '+this.counter);
+      }
+  },
+  });
+
+  new Vue({
+   el:'#customEvent',
+   data: {
+       languageClick:'',
+       languages : ["Java", "PHP", "C++", "C", "Javascript", "C#", "Python", "HTML"]
+       //counter : 0
+   },
+   methods: {
+       languageddisp(a){
+           this.languageClick = a;
+           //this.counter++;
+           //alert(a +' clicked '+this.counter);
+       }
+   }
+  });
+
+  //component | child
+  Vue.component('child', {
+    props: ['text'],
+    template: '<h2>{{ text }}<h2>'
+  });
+
+  new Vue({
+    el: '#hehe',
+    data : function() {
+        return {
+            title : "TEST COMPONENT"
+        }
+    },
+  });
+  </script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+     <script type = "text/javascript" src = "global.js"></script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+
+  <body>
+    <div id="directive">
+          <div v-changestyle="{color:'green'}">Vue directive custom </div>
+          <input v-model="name" placeholder="Your name sir!" /><br/>
+          <span>Your name {{ name | countLetters | testAlert }}</span>  <!--adding antoher parameter ('good','test') -->
+      </div>
+  </body>
+
+  <script type = "text/javascript">
+    //** directives
+    Vue.directive('changestyle',{
+        bind(e1,binding,vnode){
+            console.log(e1);
+            console.log(binding.value.color);
+            console.log(vnode);
+            e1.style.color = binding.value.color;
+            e1.style.fontSize = "30px";
+        }
+    });
+
+    new Vue({
+      el: '#directive',
+      data: {
+          name:""
+      },
+      filters: {
+          countLetters(value) { //giving another paramenter a1,a2
+              //console.log(a1);
+              //console.log(a2);
+              if(!value) return '';
+              value = value.toString();
+              return value.charAt(0).toUpperCase() + value.slice(1);
+          },
+          testAlert(value){
+              return value +" count :" + value.length;
+          }
+      },
+      method: {
+
+      }
+    });
+  </script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+     <script type = "text/javascript" src = "global.js"></script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+
+  <body>
+    <div id="binding">
+        <h2>{{title}}</h2>
+        <div :class="[isActive ? activeClass : infoClass, hasError ? errorClass : '']">{{title}}</div>
+        <div class="info" :class="{active:isActive, displayError:hasError}">{{title}}</div><br/>
+        <a href = "hreflink" :target = "target"> Click Me </a> <br/>
+        <a href = "{{hreflink}}" :target = "target">Click Me </a>  <br/>
+        <a :href = "hreflink" :target = "target">Click Me </a>   <br/>
+        <new_compo :class="{active:isActive}"></new_compo>
+        <div :style="styleObject">Styling</div>
+        <h4>Textbox</h4>
+        <input v-model="name" placeholder="Input your name" />
+        <h4>Your name is {{name}}</h4>
+        <hr style="border-top: dotted 1px;" />
+        <h4>Textarea</h4>
+        <textarea v-model="textMessage" placeholder="your message"></textarea>
+        <h4>Your message : {{textMessage}}</h4>
+        <hr style="border-top: dotted 1px;" />
+        <h4>Checkbox</h4>
+        <input type="checkbox" id="checkbox" v-model="checked">{{checked}}
+        <hr style="border-top: dotted 1px;" />
+        <h4>Radio Button</h4>
+        <input type="radio" id="white" value="White" v-model="radioPicked">White
+        <input type="radio" id="black" value="Black" v-model="radioPicked">Black
+        <h4>The color which you pick is {{radioPicked}}</h4>
+        <hr style="border-top: dotted 1px;" />
+        <h4>Dropdown</h4>
+        <select v-model="programLang">
+            <option disable value="">Select one</option>
+            <option>Swift</option>
+            <option>Javascript</option>
+            <option>Vue</option>
+            <option>Kotlin</option>
+            <option>Scala</option>
+            <option>Go</option>
+            <option>Rust</option>
+        </select>
+        <h4>Your strongest language is {{programLang}}</h4>
+        <hr style="border-top: dotted 1px;" />
+        <span style = "font-size:25px;">Enter Age:</span> <input v-model.number = "age" type = "number">
+         <br/>
+         <span style = "font-size:25px;">Enter Message:</span> <input v-model.lazy = "displayMessage">
+         <h3>Display Message : {{displayMessage}}</h3>
+         <br/>
+         <span style = "font-size:25px;">Enter Message : </span><input v-model.trim = "displayMessage2">
+         <h3>Display Message : {{displayMessage2}}</h3>
+      </div>
+  </body>
+
+  <script type = "text/javascript">
+    //** binding
+      var vm2 = new Vue({
+        el:'#binding',
+        data: {
+          title : "Binding",
+          hreflink : "http://www.google.com",
+          target : "_blank",
+          isActive: false,
+          hasError: false,
+          infoClass: 'info',
+          activeClass: 'active',
+          errorClass: 'displayError',
+          styleObject: {
+              color: 'darkblue',
+              fontSize: '50px'
+          },
+          name: '',
+          textMessage: '',
+          checked: false,
+          radioPicked: null, //White for default value in first time.
+          programLang: '',
+          age: 0,
+          displayMessage:'',
+          displayMessage2:''
+        },
+        components:{
+            'new_compo':{
+                template: '<div class="info">Binding from component</div>'
+            }
+        }
+      });
+  </script>
+</html>

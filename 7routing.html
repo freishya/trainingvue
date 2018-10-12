@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue JS Training</title>
+    <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script type = "text/javascript" src = "https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script async type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+    <script type = "text/javascript" src = "global.js"></script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel = "stylesheet" type = "text/css">
+    <link href = "global.css" rel = "stylesheet" type = "text/css">
+  </head>
+    <div id="routing">
+      <p>
+        <router-link :to="{path:'/home'}">Home</router-link>
+        <router-link :to="{path:'/about'}">About</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+  <body>
+  </body>
+
+  <script type = "text/javascript">
+  //Routing
+      const notFound = { template : '<p> Page not found, check url! </p>' }
+      const home = { template : '<p> Its your home </p>' }
+      const about = { template : '<p> About page </p>' }
+
+      const routes = [
+          {path:'/home', component:home },
+          {path:'/about', component:about }
+      ]
+
+      const router = new VueRouter({
+        routes
+      })
+
+      new Vue({
+          el:'#routing',
+          router
+          // data : {
+          //     currentRoute : window.location.pathname
+          // },
+          // computed: {
+          //     ViewComponent(){
+          //         return routes[this.currentRoute] || notFound
+          //     }
+          // },
+          // render (h) { return h(this.ViewComponent) }
+      });
+  </script>
+</html>
